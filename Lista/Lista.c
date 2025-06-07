@@ -26,20 +26,56 @@ void inserirInicio(int valor, struct Lista* lista) {
 }
 
 void inserirPosicao(struct Lista* lista, int valor, int posicao){
+	struct No* temp;
 	
 	if(posicao == 0 || lista -> inicio == NULL){
 		inserirInicio(valor, lista);
+		return;
 	}
+	
+	temp = lista -> inicio;
+	
+	//objetivo do for é encontrar o elemento anterios a posicao
+	//que o novo elemento sera inserido
+
+	for(int i = 0; i < posicao -1; i++){
+		temp = temp -> proximo;		
+	}
+	
+	struct No* novo = (struct No*) malloc(sizeof(struct No*));
+	novo -> dado = valor;
+	novo -> proximo = temp -> proximo;
+	temp -> proximo = novo;
+	
 }
 
 void imprimir(struct Lista *lista) {
 	No* temp = lista -> inicio;
 
 	while(temp != NULL) {
-		printf("%d", temp -> dado);
+		printf(" %d ->", temp -> dado);
 		temp = temp -> proximo;
 	}
-	printf("\nNULL");
+	printf("NULL");
+}
+
+void inserirFim(struct Lista *lista, int valor){
+	struct No* temp;
+	temp = lista -> inicio;
+	
+	if(lista -> inicio == NULL){
+		inserirInicio(valor, lista);
+		return;
+	}
+	
+	while(temp -> proximo != NULL){
+		temp = temp -> proximo;
+	}
+	
+	struct No* novo = (struct No*) malloc(sizeof(struct No*));
+	novo -> dado = valor;
+	novo -> proximo = NULL;
+	temp -> proximo = novo;
 }
 
 int main() {
@@ -53,7 +89,7 @@ int main() {
 	inserirInicio(3, &lista1);
 	inserirInicio(2, &lista1);
 	
-	inserirPosicao(&lista1, 7, 0);
+	inserirPosicao(&lista1, 7, 1);
 
 	imprimir(&lista1);
 
