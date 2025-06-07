@@ -1,4 +1,4 @@
-#include <io.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
@@ -15,7 +15,7 @@ typedef struct Lista {
 };
 
 void inicializar(Lista* lista) {
-	lista -> cabeca = NULL;
+	lista -> inicio = NULL;
 }
 
 void inserirInicio(int valor, struct Lista* lista) {
@@ -36,10 +36,10 @@ void imprimir(struct Lista *lista) {
 	No* temp = lista -> inicio;
 
 	while(temp != NULL) {
-		print("%d", temp -> dado);
+		printf("%d", temp -> dado);
 		temp = temp -> proximo;
 	}
-	printf("NULL");
+	printf("\nNULL");
 }
 
 int main() {
